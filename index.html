@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="nuvem.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Nimbus</title>
+  </head>
+  <body>
+    <header>
+      <img src="nimbus.jpg" alt="Logo" class="logo" />
+    </header>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="login-container">
+        <form>
+          <label for="username">Usuario:</label>
+          <input type="text" id="username" name="username" required />
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required />
+          <button type="button" onclick="login()">Login</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      function login() {
+        // Substitua as informações de usuário e senha com a sua lógica real de autenticação
+        const correctUsername = "marcio";
+        const correctPassword = "1234";
+        
+        const enteredUsername = document.getElementById("username").value;
+        const enteredPassword = document.getElementById("password").value;
+
+        if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
+          // Redireciona para a página de dashboard se o login for bem-sucedido
+          window.location.href = "home.html";
+        } else {
+          alert("Usuário ou senha incorretos. Tente novamente.");
+        }
+      }
+    </script>
+  </body>
+</html>

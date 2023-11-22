@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #0000ff;
+    color: white;
+    padding: 10px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 50px; /* Ajuste o tamanho da logo conforme necessário */
+    height: auto;
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-right: 20px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .main {
+    padding: 20px;
+  }
+  
+  .content {
+    text-align: center;
+    max-width: 600px; /* Defina a largura máxima do conteúdo conforme necessário */
+    margin: 0 auto; /* Isso centralizará o bloco de conteúdo */
+  }
+  
+  .main-image {
+    max-width: 550px;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    color: #d6a607;
+  }
+  
+  p {
+    color: #333;
+  }
+  

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="nuvem.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0000ff" />
+    <link rel="stylesheet" href="home.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Nimbus</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo-container">
+            <a href="home.html">
+                <img src="nuvem.png" alt="Nimbus Logo" class="logo" />
+              </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="mapa.html">Mapa</a></li>
+          <li><a href="grafico.html">Grafico</a></li>
+          <li><a href="index.html">Sair</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+        <label for="mesSelector">Selecione o Mês:</label>
+    <select id="mesSelector">
+      <option value="Janeiro">Janeiro</option>
+      <option value="Fevereiro">Fevereiro</option>
+      <option value="Março">Março</option>
+      <option value="Abril">Abril</option>
+      <option value="Maio">Maio</option>
+    </select>
+
+    <!-- Adicione um seletor de temperatura -->
+    <label for="tempSelector">Selecione a Temperatura:</label>
+    <select id="tempSelector">
+      <option value="25">25°C</option>
+      <option value="26">26°C</option>
+      <option value="27">27°C</option>
+      <option value="28">28°C</option>
+      <option value="29">29°C</option>
+    </select>
+
+    <!-- Adicione um elemento canvas para o gráfico -->
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <!-- Adicione um script para criar o gráfico -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Dados de exemplo para o gráfico de barras
+        var dados = {
+          labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio"],
+          datasets: [{
+            label: "Temperatura Média (°C)",
+            data: [25, 26, 28, 24, 27],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
+            borderColor: 'rgba(75, 192, 192, 1)', // Cor da borda das barras
+            borderWidth: 1
+          }]
+        };
+
+        // Configurações do gráfico
+        var config = {
+          type: 'bar',
+          data: dados,
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                // Adicione um filtro para o eixo y
+                filters: {
+                  min: 20, // Valor mínimo
+                  max: 30, // Valor máximo
+                  stepSize: 2 // Incremento
+                }
+              },
+              x: {
+                // Adicione um filtro para o eixo x
+                filters: {
+                  include: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio"] // Inclui todos os meses inicialmente
+                }
+              }
+            }
+          }
+        };
+
+        // Criação do gráfico
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, config);
+
+        // Adicione ouvintes de eventos para os seletores para atualizar o gráfico
+        document.getElementById('mesSelector').addEventListener('change', atualizarGrafico);
+        document.getElementById('tempSelector').addEventListener('change', atualizarGrafico);
+
+        // Função para atualizar o gráfico com base nos seletores de mês e temperatura
+        function atualizarGrafico() {
+          var mesSelecionado = document.getElementById('mesSelector').value;
+          var tempSelecionada = parseFloat(document.getElementById('tempSelector').value);
+
+          // Atualize os dados do gráfico com base no mês e temperatura selecionados
+          myChart.data.datasets[0].data = [tempSelecionada];
+          // Atualize os rótulos do eixo x
+          myChart.data.labels = [mesSelecionado];
+          // Atualize o gráfico
+          myChart.update();
+        }
+      });
+    </script>
+  </main>
+</body>
+</html>
