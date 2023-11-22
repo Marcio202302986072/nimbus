@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="nuvem.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0000ff" />
+    <link rel="stylesheet" href="home.css" />
+    <!-- Adicione as referências para as bibliotecas jsPDF e jspdf-autotable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.7.4/jspdf.plugin.autotable.min.js"></script>
+    <title>Nimbus</title>
+  </head>
+  <body onload="atualizarTabela()"> <!-- Adicione o evento onload para chamar a função ao carregar a página -->
+    <header>
+      <nav class="navbar">
+        <div class="logo-container">
+          <img src="nuvem.png" alt="Nimbus Logo" class="logo" />
+        </div>
+        <ul class="nav-links">
+          <li><a href="mapa.html">Mapa</a></li>
+          <li><a href="grafico.html">Gráfico</a></li>
+          <li><a href="index.html">Sair</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Adicione a tabela abaixo -->
+    <section>
+      <h2>Tabela Meteorológicos</h2>
+      <label for="cidadeSelect">Escolha a Cidade:</label>
+      <select id="cidadeSelect" onchange="atualizarTabela()">
+        <option value="rio">Rio de Janeiro</option>
+        <option value="curitiba">Curitiba</option>
+        <option value="sao_paulo">São Paulo</option>
+      </select>
+
+      <table border="1" id="tabela">
+        <thead>
+          <tr>
+            <th>Bairro</th>
+            <th>Temperatura (°C)</th>
+            <th>Umidade (%)</th>
+            <th>Condição do Tempo</th>
+          </tr>
+        </thead>
+        <tbody id="corpoTabela">
+          <!-- Dados serão adicionados aqui dinamicamente -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Adicione o script JavaScript para a exportação para PDF e atualização da tabela -->
+    <script>
+        function exportarParaPDF() {
+          const doc = new jsPDF();
+          doc.autoTable({ html: '#tabela' });
+          doc.save('dados_meteorologicos.pdf');
+        }
+  
+        function atualizarTabela() {
+          const cidadeSelect = document.getElementById('cidadeSelect');
+          const tabelaCorpo = document.getElementById('corpoTabela');
+  
+          // Limpa a tabela
+          tabelaCorpo.innerHTML = '';
+  
+          // Adiciona dados conforme a cidade selecionada
+          if (cidadeSelect.value === 'rio') {
+            tabelaCorpo.innerHTML += `
+              <tr>
+                <td>Copacabana</td>
+                <td>28</td>
+                <td>65</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Ipanema</td>
+                <td>26</td>
+                <td>70</td>
+                <td>Nublado</td>
+              </tr>
+              <tr>
+                <td>Botafogo</td>
+                <td>27</td>
+                <td>68</td>
+                <td>Chuva Leve</td>
+              </tr>
+              <tr>
+                <td>Leblon</td>
+                <td>29</td>
+                <td>62</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Santa Teresa</td>
+                <td>25</td>
+                <td>75</td>
+                <td>Chuva</td>
+              </tr>
+              <tr>
+                <td>Flamengo</td>
+                <td>27</td>
+                <td>68</td>
+                <td>Nublado</td>
+              </tr>
+              <tr>
+                <td>Lapa</td>
+                <td>26</td>
+                <td>70</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Gávea</td>
+                <td>28</td>
+                <td>63</td>
+                <td>Chuva Leve</td>
+              </tr>`;
+          } else if (cidadeSelect.value === 'curitiba') {
+              tabelaCorpo.innerHTML += `
+              <tr>
+                <td>Ganchinho</td>
+                <td>27</td>
+                <td>65</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Atuba</td>
+                <td>29</td>
+                <td>70</td>
+                <td>Nublado</td>
+              </tr>
+              <tr>
+                <td>Boqueirão</td>
+                <td>26</td>
+                <td>68</td>
+                <td>Chuva Leve</td>
+              </tr>
+              <tr>
+                <td>São Lourenço</td>
+                <td>30</td>
+                <td>63</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Barreirinha</td>
+                <td>24</td>
+                <td>76</td>
+                <td>Chuva</td>
+              </tr>
+              <tr>
+                <td>Batel</td>
+                <td>22</td>
+                <td>60</td>
+                <td>Parcialmente Nublado</td>
+              </tr>
+              <tr>
+                <td>Centro Cívico</td>
+                <td>20</td>
+                <td>65</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Santa Felicidade</td>
+                <td>24</td>
+                <td>55</td>
+                <td>Chuva Leve</td>
+              </tr>`;
+          } else if (cidadeSelect.value === 'sao_paulo') {
+              tabelaCorpo.innerHTML += `
+              <tr>
+                <td>Morumbi</td>
+                <td>30</td>
+                <td>67</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Jardim Helena</td>
+                <td>24</td>
+                <td>68</td>
+                <td>Nublado</td>
+              </tr>
+              <tr>
+                <td>Itaim Paulista</td>
+                <td>29</td>
+                <td>70</td>
+                <td>Chuva Leve</td>
+              </tr>
+              <tr>
+                <td>Santana</td>
+                <td>31</td>
+                <td>63</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Cachoeirinha</td>
+                <td>25</td>
+                <td>75</td>
+                <td>Chuva</td>
+              </tr>
+              <tr>
+                <td>Jabaquara</td>
+                <td>28</td>
+                <td>68</td>
+                <td>Nublado</td>
+              </tr>
+              <tr>
+                <td>Pinheiros</td>
+                <td>27</td>
+                <td>70</td>
+                <td>Ensolarado</td>
+              </tr>
+              <tr>
+                <td>Móoca</td>
+                <td>29</td>
+                <td>62</td>
+                <td>Chuva Leve</td>
+              </tr>`;
+          }
+        }
+      </script>
+    </body>
+  </html>
